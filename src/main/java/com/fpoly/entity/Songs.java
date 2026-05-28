@@ -45,12 +45,14 @@ public class Songs{
 	@Column(name = "duration_sec")
 	private Integer durationSec;
 
-	@Column(name = "is_public")
+	@Builder.Default
+    @Column(name = "is_public")
 	private Boolean isPublic = false;
 
 	@Column(name = "token_cost")
 	private Integer tokenCost;
 
-	@Column(name = "created_at")
+	@Builder.Default
+    @Column(name = "created_at")
 	private LocalDateTime createdAt = LocalDateTime.now();
 }
