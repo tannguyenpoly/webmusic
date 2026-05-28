@@ -1,40 +1,34 @@
 package com.fpoly.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "users")
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Entity
+@Table(name = "token_packages")
+public class TokenPackage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false, length = 50)
-    private String username;
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
 
-    @Column(unique = true, nullable = false, length = 100)
-    private String email;
+    @Column(name = "token_amount", nullable = false)
+    private Integer tokenAmount;
 
-    @Column(name = "password_hash", nullable = false, length = 255)
-    private String passwordHash;
-
-    @Column(name = "full_name", length = 100)
-    private String fullName;
-
-    @Column(name = "avatar_url", length = 255)
-    private String avatarUrl;
-
-    @Column(name = "token_balance")
-    private Integer tokenBalance = 0;
-
-    @Column(length = 20)
-    private String role = "USER";
+    @Column(name = "price", nullable = false, precision = 18, scale = 2)
+    private BigDecimal price;
 
     @Column(name = "is_active")
     private Boolean isActive = true;
