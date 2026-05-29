@@ -1,5 +1,5 @@
 package com.fpoly.entity;
-import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "token_transactions")
-public class TokenTransaction {
+@Table(name = "songs")
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,23 +22,34 @@ public class TokenTransaction {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User user; 
 
-    @ManyToOne
-    @JoinColumn(name = "package_id", nullable = false)
-    private TokenPackage tokenPackage;
+    @Column(name = "title", nullable = false, length = 200)
+    private String title;
 
-    @Column(name = "amount_paid", precision = 18, scale = 2)
-    private BigDecimal amountPaid;
+    @Column(name = "prompt", columnDefinition = "NVARCHAR(MAX)")
+    private String prompt;
 
-    @Column(name = "token_amount")
-    private Integer tokenAmount;
+    @Column(name = "audio_url", length = 255)
+    private String audioUrl;
+
+    @Column(name = "cover_url", length = 255)
+    private String coverUrl;
+
+    @Column(name = "duration_sec")
+    private Integer durationSec;
+
+    @Column(name = "is_public")
+    private Boolean isPublic = false;
+
+    @Column(name = "token_cost")
+    private Integer tokenCost;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = false;
 
     @Column(name = "status", length = 20)
-    private String status = "PENDING";
-
-    @Column(name = "vnpay_txn_ref", length = 100)
-    private String vnpayTxnRef;
+    private String status = "PROCESSING";
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
